@@ -1,3 +1,9 @@
+# General
+.DS_Store
+
+### database files ###
+/src/main/resources/jsdata/*
+
 ### Maven ###
 /target/
 !.mvn/wrapper/maven-wrapper.jar
