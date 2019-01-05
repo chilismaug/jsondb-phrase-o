@@ -15,7 +15,7 @@ public class PhraseOJsonDb implements CommandLineRunner {
 
 	public static void main(String[] args) {
 
-		int collSize = 0;
+		int colnSize = 0;
 
 		// Actual location on disk for database files, process should have read-write
 		// permissions to this folder
@@ -26,87 +26,104 @@ public class PhraseOJsonDb implements CommandLineRunner {
 
 		JsonDBTemplate jsonDBonDisk = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
 
-		// start some data explorations
-		// first, start fresh
+		// first, drop old and create new data collections
 		if (jsonDBonDisk.collectionExists("firstphrases")) {
 			jsonDBonDisk.dropCollection("firstphrases");
 		}
 		if (jsonDBonDisk.collectionExists("secondphrases")) {
 			jsonDBonDisk.dropCollection("secondphrases");
 		}
-
-		// Creating a collection if it does not exist
+		if (jsonDBonDisk.collectionExists("thirdphrases")) {
+			jsonDBonDisk.dropCollection("thirdphrases");
+		}
 		jsonDBonDisk.createCollection(FirstPhrase.class);
 		jsonDBonDisk.createCollection(SecondPhrase.class);
+		jsonDBonDisk.createCollection(ThirdPhrase.class);
+		
 
-		// Save a document into a collection
-		SecondPhrase thing1 = new SecondPhrase();
+		// Add documents into collections
+
+		FirstPhrase thing1 = new FirstPhrase();
 		thing1.setId("1");
-		thing1.setPhrase("I am Second");
+		thing1.setPhrase("My Favorite");
+		jsonDBonDisk.insert(thing1);		
+
+		thing1.setId("2");
+		thing1.setPhrase("Onceler El Secondo");
 		jsonDBonDisk.insert(thing1);
-		jsonDBonDisk.save(thing1, SecondPhrase.class);
+ 
+		thing1.setId("3");
+		thing1.setPhrase("Ecto-tastic");
+		jsonDBonDisk.upsert(thing1);
+		
+		thing1.setId("4");
+		thing1.setPhrase("Fa Fa Ce La");
+		jsonDBonDisk.upsert(thing1);
 
-		// Save a document into a collection
-		FirstPhrase instance2 = new FirstPhrase();
-		instance2.setId("2");
-		instance2.setPhrase("Instance 2, Id 2");
-		jsonDBonDisk.insert(instance2);
-		jsonDBonDisk.save(instance2, FirstPhrase.class);
+		thing1.setId("5");
+		thing1.setPhrase("BAR-TO-FOO");
+		jsonDBonDisk.upsert(thing1);
 
-		// Inserting a document into a collection
-		FirstPhrase instance10 = new FirstPhrase();
-		instance10.setId("10");
-		instance10.setPhrase("Artisanal");
-		jsonDBonDisk.insert(instance10);
+		thing1.setId("6");
+		thing1.setPhrase("Iko Iko");
+		jsonDBonDisk.upsert(thing1);
 
-		// Inserting a document into a collection
-		FirstPhrase instance1 = new FirstPhrase();
-		instance1.setId("1");
-		instance1.setPhrase("My Favorite");
-		jsonDBonDisk.insert(instance1);
+		thing1.setId("7");
+		thing1.setPhrase("WallaWallaBingBang");
+		jsonDBonDisk.upsert(thing1);
 
-		// Upsert a document into a collection
-		FirstPhrase instance3 = new FirstPhrase();
-		instance3.setId("3");
-		instance3.setPhrase("Ecto-tastic");
+		thing1.setId("8");
+		thing1.setPhrase("Fopp Shop");
+		jsonDBonDisk.upsert(thing1);
 
-		jsonDBonDisk.upsert(instance3);
+		thing1.setId("9");
+		thing1.setPhrase("Number 9");
+		jsonDBonDisk.insert(thing1);
 
-		// Upsert a document into a collection
-		FirstPhrase instance4 = new FirstPhrase();
-		instance4.setId("4");
-		instance4.setPhrase("Fa Fa Ce La");
-		jsonDBonDisk.upsert(instance4);
+		thing1.setId("10");
+		thing1.setPhrase("Artisanal");
+		jsonDBonDisk.insert(thing1);
+		
+		SecondPhrase thing2 = new SecondPhrase();
+		thing2.setId("1");
+		thing2.setPhrase("I am Second the 1st");
+		jsonDBonDisk.insert(thing2);
 
-		// Upsert a document into a collection
-		FirstPhrase instance5 = new FirstPhrase();
-		instance5.setId("5");
-		instance5.setPhrase("BAR-TO-FOO");
-		jsonDBonDisk.upsert(instance5);
+		thing2.setId("2");
+		thing2.setPhrase("Secondo the II");
+		jsonDBonDisk.insert(thing2);
+ 
+		thing2.setId("3");
+		thing2.setPhrase("Dualistic Dichotomizer");
+		jsonDBonDisk.upsert(thing2);
+		
+		thing2.setId("4");
+		thing2.setPhrase("Fa Fa Ce La C'est Deux");
+		jsonDBonDisk.upsert(thing2);
+		
+		ThirdPhrase thing3 = new ThirdPhrase();
+		thing3.setId("1");
+		thing3.setPhrase("Three is me");
+		jsonDBonDisk.insert(thing3);
 
-		// Upsert a document into a collection
-		FirstPhrase instance6 = new FirstPhrase();
-		instance6.setId("6");
-		instance6.setPhrase("Iko Iko");
-		jsonDBonDisk.upsert(instance6);
-
-		// Upsert a document into a collection
-		FirstPhrase instance7 = new FirstPhrase();
-		instance7.setId("7");
-		instance7.setPhrase("WallaWallaBingBang");
-		jsonDBonDisk.upsert(instance7);
-
-		// Upsert a document into a collection
-		FirstPhrase instance8 = new FirstPhrase();
-		instance8.setId("8");
-		instance8.setPhrase("Fopp Shop");
-		jsonDBonDisk.upsert(instance8);
+		thing3.setId("2");
+		thing3.setPhrase("Thriceler El Secondo");
+		jsonDBonDisk.insert(thing3);
+ 
+		thing3.setId("3");
+		thing3.setPhrase("Trifecto-tastic");
+		jsonDBonDisk.upsert(thing3);
+		
+		thing3.setId("4");
+		thing3.setPhrase("Da Da Da");
+		jsonDBonDisk.upsert(thing3);
+		
 
 		// Find a document when you know the Id
-		FirstPhrase instance9 = jsonDBonDisk.findById("1", FirstPhrase.class);
+		thing1 = jsonDBonDisk.findById("1", FirstPhrase.class);
 		System.out.println();
 		System.out.println("------- find qry by id value eq 11  ------");
-		System.out.println("and print phrase: " + instance9.getPhrase());
+		System.out.println("and print phrase: " + thing1.getPhrase());
 
 		// fetch all them thingers what ya got
 		System.out.println();
@@ -117,33 +134,33 @@ public class PhraseOJsonDb implements CommandLineRunner {
 
 		for (FirstPhrase item : instances) {
 			System.out.println("Id: " + item.getId() +", "+ "Phrase: " + item.getPhrase() );
-			collSize += 1;
-			System.out.println("collSize is : " + collSize);
+			colnSize += 1;
+			System.out.println("collSize is : " + colnSize);
 		}
 		System.out.println();
-
 		// find out how many words are in list
-		int oneLength = collSize ;
-
+		int oneLength = jsonDBonDisk.getCollection(FirstPhrase.class).size();
 		System.out.println("oneLength is : " + oneLength);
+		int twoLength = jsonDBonDisk.getCollection(SecondPhrase.class).size();
+		int threeLength = jsonDBonDisk.getCollection(ThirdPhrase.class).size();
 
 		// generate three random numbers, to pull random words from each list
 		int rand1 = (int)(1 + Math.random() * oneLength);
-		int rand2 = (int)(1 + Math.random() * oneLength);
-		int rand3 = (int)(1 + Math.random() * oneLength);
+		int rand2 = (int)(1 + Math.random() * twoLength);
+		int rand3 = (int)(1 + Math.random() * threeLength);
 
 		System.out.println("rand3 is : " + rand3);
 
 
 		String rand1Id =  String.valueOf(rand1);
-		String rand2Id =  "1";
-		String rand3Id =  String.valueOf(rand3);
+		String rand2Id =  String.valueOf(rand2);  
+		String rand3Id =  String.valueOf(rand3);  
 
 		// now build a phrase and tidy the text removing extra spaces piecemeal
 
 		String phrase = jsonDBonDisk.findById(rand1Id,FirstPhrase.class).getPhrase()
 				+ " " + jsonDBonDisk.findById(rand2Id,SecondPhrase.class).getPhrase()
-				+ " " + jsonDBonDisk.findById(rand3Id,FirstPhrase.class).getPhrase();
+				+ " " + jsonDBonDisk.findById(rand3Id,ThirdPhrase.class).getPhrase();
 		System.out.println("What we need is some more " + phrase.replace("\"", ""));
 
 	}
