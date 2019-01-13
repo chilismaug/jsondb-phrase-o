@@ -20,7 +20,6 @@ public class PhraseOMatic2 {
 		String baseScanPackage = "com.example.demo";
 	   
 		JsonDBTemplate jsonDBonDisk = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
-
  
 		List<Object> wordList1 = jsonDBonDisk.findAll("firstphrases"); 
 		List<Object> wordList2 = jsonDBonDisk.findAll("secondphrases");	
@@ -30,11 +29,6 @@ public class PhraseOMatic2 {
 		int oneLength = wordList1.size();
 		int twoLength = wordList2.size();
 		int threeLength = wordList3.size();
-
-		/*
-		 * int oneLength = wordListOne.length; int twoLength = wordListTwo.length; int
-		 * threeLength = wordListThree.length;
-		 */
 
 		// generate three random numbers, to pull random words from each list
 		int rand1 = (int) (Math.random() * oneLength);
@@ -51,10 +45,6 @@ public class PhraseOMatic2 {
 				+ jsonDBonDisk.findById(rand3Id, ThirdPhrase.class).getPhrase();
 
 //		String phrase = wordList1.get(rand1). + " " + wordList2.get(rand2) + " " + wordList3.get(rand3)  + "." ;
-
-		// String phrase = wordListOne[rand1] + " " + wordListTwo[rand2] + " " +
-		// wordListThree[rand3] + ".";
-		// now return it
 
 		return ("What we need is a " + phrase);
 
