@@ -99,34 +99,34 @@ public class Bootstrapper implements CommandLineRunner {
 		jsonDBonDisk.save(thing1, SecondPhrase.class);
 
 		// Save a document into a collection, same instance var?
-		thing1.setId("2");
+		thing1.setId("5");
 		thing1.setPhrase("I am 101, No make that 2");
 		jsonDBonDisk.insert(thing1);
 		jsonDBonDisk.save(thing1, SecondPhrase.class);
 
 		// Save a document into a collection, same instance var?
-		thing1.setId("3");
-		thing1.setPhrase("I am 4");
+		thing1.setId("6");
+		thing1.setPhrase("Now we are 6");
 		jsonDBonDisk.insert(thing1);
 		jsonDBonDisk.save(thing1, SecondPhrase.class);
 
 		// Save a document into a collection, same instance var? yep
-		thing1.setId("4");
+		thing1.setId("7");
 		thing1.setPhrase("Hokey-Dokey-Schmokey");
 		jsonDBonDisk.insert(thing1);
 		jsonDBonDisk.save(thing1, SecondPhrase.class);
 
 		// Save a document into a collection
 		ThirdPhrase thingthang = new ThirdPhrase();
-		thingthang.setId("1");
+		thingthang.setId("7");
 		thingthang.setPhrase("One Hand Clapping");
 		jsonDBonDisk.upsert(thingthang );
 
-		thingthang.setId("2");
+		thingthang.setId("8");
 		thingthang.setPhrase("Dos Crickets");
 		jsonDBonDisk.upsert(thingthang );
 
-		thingthang.setId("3");
+		thingthang.setId("9");
 		thingthang.setPhrase("Three Legs Crossing");
 		jsonDBonDisk.upsert(thingthang );
 
