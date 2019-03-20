@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import io.jsondb.JsonDBTemplate;
 
 @Component
-public class PhraseOJsonDb implements CommandLineRunner {
+public class Phrase_O_Mat_JsonDb implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
