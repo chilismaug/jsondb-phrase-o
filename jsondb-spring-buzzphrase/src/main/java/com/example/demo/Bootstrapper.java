@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import io.jsondb.JsonDBTemplate;
 
-@Component
+ 
 public class Bootstrapper implements CommandLineRunner {
 
     @Override
@@ -19,8 +19,7 @@ public class Bootstrapper implements CommandLineRunner {
 
 		JsonDBTemplate jsonDBonDisk = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
 
-		// start some data explorations
-		// first, start fresh
+		// drop some data 
 		if (jsonDBonDisk.collectionExists("firstphrases")) {
 			jsonDBonDisk.dropCollection("firstphrases");
 		}
@@ -31,7 +30,7 @@ public class Bootstrapper implements CommandLineRunner {
 			jsonDBonDisk.dropCollection("thirdphrases");
 		}
 
-		// Creating a collection if it does not exist
+		// Creating a collection 
 		jsonDBonDisk.createCollection(FirstPhrase.class);
 		jsonDBonDisk.createCollection(SecondPhrase.class);
 		jsonDBonDisk.createCollection(ThirdPhrase.class);
