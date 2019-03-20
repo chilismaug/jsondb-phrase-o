@@ -27,22 +27,19 @@ public class Bootstrapper implements CommandLineRunner {
 		if (jsonDBonDisk.collectionExists("secondphrases")) {
 			jsonDBonDisk.dropCollection("secondphrases");
 		}
+		if (jsonDBonDisk.collectionExists("thirdphrases")) {
+			jsonDBonDisk.dropCollection("thirdphrases");
+		}
 
 		// Creating a collection if it does not exist
 		jsonDBonDisk.createCollection(FirstPhrase.class);
 		jsonDBonDisk.createCollection(SecondPhrase.class);
-
-		// Save a document into a collection
-		SecondPhrase thing1 = new SecondPhrase();
-		thing1.setId("1");
-		thing1.setPhrase("I am Second");
-		jsonDBonDisk.insert(thing1);
-		jsonDBonDisk.save(thing1, SecondPhrase.class);
+		jsonDBonDisk.createCollection(ThirdPhrase.class);
 
 		// Save a document into a collection
 		FirstPhrase instance2 = new FirstPhrase();
 		instance2.setId("2");
-		instance2.setPhrase("Instance 2, Id 2");
+		instance2.setPhrase("FirstPhrase Value in Instance 2, Id 2");
 		jsonDBonDisk.insert(instance2);
 		jsonDBonDisk.save(instance2, FirstPhrase.class);
 
@@ -94,5 +91,45 @@ public class Bootstrapper implements CommandLineRunner {
 		instance8.setId("8");
 		instance8.setPhrase("Fopp Shop");
 		jsonDBonDisk.upsert(instance8);
+
+		// Save a document into a collection
+		SecondPhrase thing1 = new SecondPhrase();
+		thing1.setId("1");
+		thing1.setPhrase("I am Second");
+		jsonDBonDisk.insert(thing1);
+		jsonDBonDisk.save(thing1, SecondPhrase.class);
+
+		// Save a document into a collection, same instance var?
+		thing1.setId("2");
+		thing1.setPhrase("I am 101, No make that 2");
+		jsonDBonDisk.insert(thing1);
+		jsonDBonDisk.save(thing1, SecondPhrase.class);
+
+		// Save a document into a collection, same instance var?
+		thing1.setId("3");
+		thing1.setPhrase("I am 4");
+		jsonDBonDisk.insert(thing1);
+		jsonDBonDisk.save(thing1, SecondPhrase.class);
+
+		// Save a document into a collection, same instance var? yep
+		thing1.setId("4");
+		thing1.setPhrase("Hokey-Dokey-Schmokey");
+		jsonDBonDisk.insert(thing1);
+		jsonDBonDisk.save(thing1, SecondPhrase.class);
+
+		// Save a document into a collection
+		ThirdPhrase thingthang = new ThirdPhrase();
+		thingthang.setId("1");
+		thingthang.setPhrase("One Hand Clapping");
+		jsonDBonDisk.upsert(thingthang );
+
+		thingthang.setId("2");
+		thingthang.setPhrase("Dos Crickets");
+		jsonDBonDisk.upsert(thingthang );
+
+		thingthang.setId("3");
+		thingthang.setPhrase("Three Legs Crossing");
+		jsonDBonDisk.upsert(thingthang );
+
     }
 }
