@@ -4,7 +4,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import io.jsondb.JsonDBTemplate;
 
- 
 public class Bootstrapper implements CommandLineRunner {
 
     @Override
@@ -19,7 +18,7 @@ public class Bootstrapper implements CommandLineRunner {
 
 		JsonDBTemplate jsonDBonDisk = new JsonDBTemplate(dbFilesLocation, baseScanPackage);
 
-		// drop some data 
+		// drop some data
 		if (jsonDBonDisk.collectionExists("firstphrases")) {
 			jsonDBonDisk.dropCollection("firstphrases");
 		}
@@ -30,7 +29,7 @@ public class Bootstrapper implements CommandLineRunner {
 			jsonDBonDisk.dropCollection("thirdphrases");
 		}
 
-		// Creating a collection 
+		// Creating a collection
 		jsonDBonDisk.createCollection(FirstPhrase.class);
 		jsonDBonDisk.createCollection(SecondPhrase.class);
 		jsonDBonDisk.createCollection(ThirdPhrase.class);
@@ -58,7 +57,6 @@ public class Bootstrapper implements CommandLineRunner {
 		FirstPhrase instance3 = new FirstPhrase();
 		instance3.setId("3");
 		instance3.setPhrase("Ecto-tastic");
-
 		jsonDBonDisk.upsert(instance3);
 
 		// Upsert a document into a collection
@@ -130,5 +128,13 @@ public class Bootstrapper implements CommandLineRunner {
 		thingthang.setPhrase("Three Legs Crossing");
 		jsonDBonDisk.upsert(thingthang );
 
+		thingthang.setId("5");
+		thingthang.setPhrase("Two Trains Running");
+		jsonDBonDisk.upsert(thingthang );
+
+		thingthang.setId("6");
+		thingthang.setPhrase("Tyre Fyre");
+		jsonDBonDisk.insert(thingthang );
+		jsonDBonDisk.save(thingthang, ThirdPhrase.class);
     }
 }

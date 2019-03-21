@@ -39,9 +39,9 @@ public class Phrase_O_Mat_JsonDb implements CommandLineRunner {
 		System.out.println("------- find id value gt 0 -----");
 
 		String jxQuery2 = String.format("/.[id>'%s']", "0");
-		List<FirstPhrase> instances = jsonDBonDisk.find(jxQuery2, FirstPhrase.class);
+		List<ThirdPhrase> instances = jsonDBonDisk.find(jxQuery2, ThirdPhrase.class);
 
-		for (FirstPhrase item : instances) {
+		for (ThirdPhrase item : instances) {
 			System.out.println("Id: " + item.getId() +", "+ "Phrase: " + item.getPhrase() );
 			collnSize += 1;
 			System.out.println("collnSize is : " + collnSize);
